@@ -1,0 +1,22 @@
+.footer{
+    @apply bg-[#1E1D1D];
+
+    ._container{
+        @apply max-w-2xl mx-auto px-4 gap-4;
+        .-social{
+            @apply flex gap-4 items-center justify-center py-4;
+        }
+
+        .-items{
+            @apply flex items-center justify-around flex-wrap gap-4 text-gray-400;
+
+            a:hover{
+                @apply text-gray-300;
+            }
+        }
+
+        p{
+            @apply text-gray-500 text-sm;
+        }
+    }
+}

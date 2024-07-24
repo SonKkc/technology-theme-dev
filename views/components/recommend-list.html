@@ -1,0 +1,27 @@
+{% if resources %}
+<div class="recommended section_grid-col-1">
+
+    <div class="">
+        <h2>Recommended For You</h2>
+    </div>
+    {% set listCard = resources|slice(0,7) %}
+     <!--items-->
+    {% for cardItem in listCard %}
+    <a href="#" class="-items">
+        {% set thumbnailFile = cardItem.getThumbnailFile() %}
+        <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+        <div class="-content">
+            <div class="-title">
+                {{ cardItem.getTitle() }}
+            </div>
+            <div class="-author">
+                <span>Paul Sawers</span>
+                <span>.</span>
+                <span>Today</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+</div>
+{% endif %}

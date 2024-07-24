@@ -1,0 +1,97 @@
+
+.outstanding{
+    @apply w-7/12 flex flex-col gap-2 max-sm:w-full;
+
+    .-items{
+        .-title{
+            @apply text-3xl max-h-[74px] overflow-hidden line-clamp-2 font-bold md:pb-4 max-sm:text-[22px] max-sm:text-center;
+        }
+    
+        .-img{
+            @apply w-full h-[450px] object-cover max-sm:h-[300px];
+        }
+    
+        .-content{
+            @apply uppercase text-base max-sm:text-sm;
+    
+            p{
+                @apply text-justify truncate;
+            }
+        }
+    }
+
+    .-items:hover .-title{
+        @apply underline cursor-pointer;
+    }
+}
+
+.latest-col{
+    @apply w-5/12 flex flex-col gap-2 overflow-hidden max-sm:w-full;
+
+    .-items{
+        @apply flex gap-2 overflow-hidden max-h-24 max-sm:max-h-[64px];
+
+        img{
+            @apply w-44 h-24 object-cover max-sm:w-32 max-sm:h-16;
+        }
+
+        .-title{
+            @apply flex-1 font-semibold line-clamp-4 overflow-hidden max-sm:text-[14px] max-h-24 max-sm:line-clamp-3;
+        }
+    }
+
+    .-items:hover .-title{
+        @apply underline cursor-pointer;
+    }
+}
+
+.latest-row{
+    @apply pt-10 max-sm:pt-2;
+    .-items{
+        @apply flex lg:flex-col md:flex-col max-sm:flex-row max-sm:gap-2 max-sm:max-h-[64px];
+    
+        img{
+            @apply w-full h-44 object-cover max-sm:w-32 max-sm:h-16;
+        }
+    
+        .-title{
+            @apply font-semibold text-ellipsis overflow-hidden max-sm:text-[14px] max-sm:flex-1 max-sm:line-clamp-3;
+        }
+    }
+
+    .-items:hover .-title{
+        @apply underline cursor-pointer;
+    }
+}
+
+.newsletter{
+    @apply w-full py-10 my-10;
+
+    ._container{
+        @apply max-w-xl mx-auto px-4 flex flex-col gap-4;
+
+        .-title{
+            @apply text-white text-3xl font-semibold text-center py-2;
+        }
+
+        .-subcribe{
+            @apply px-2 border border-transparent rounded bg-gray-300 flex items-center;
+
+            input{
+                @apply w-full bg-transparent text-white me-10 outline-none border-0;
+            }
+
+            button{
+                @apply uppercase font-semibold px-2;
+            }
+        }
+
+        .-social{
+            @apply flex gap-2 items-center justify-end;
+
+            p{
+                @apply uppercase text-white font-semibold;
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+.back-black{
+    @apply bg-black;
+}
+
+.navbar_base{
+    @apply max-sm:hidden;
+    .top-page {
+      @apply flex flex-col items-center justify-center max-w-2xl mx-auto py-10;
+    
+        a {
+            @apply text-7xl font-bold text-white uppercase;
+        }
+    
+        .-block{
+            @apply w-full h-20 bg-gray-300;
+        }
+    }
+    
+    .navbar{
+        @apply border-t-2 border-gray-300;
+        ._menu{
+            @apply my_container flex flex-1 items-center flex-wrap relative;
+        
+            .-items{
+                @apply flex justify-between items-center text-white uppercase py-4 md:text-sm md:pe-3 md:py-2 relative cursor-pointer;
+
+                .-dropdown{
+                    @apply absolute top-10 w-52 z-20 right-0 text-gray-800 bg-black px-2;
+
+                    .-items{
+                        @apply text-white p-2 text-base normal-case;
+                    }
+
+                    .-items:hover{
+                        @apply text-gray-300;
+                    }
+                }
+            }
+    
+            .-items:hover{
+                @apply text-gray-300;
+            }
+        }
+    }
+}
+
+.navbar_mobile{
+    @apply max-sm:fixed left-0 right-0 top-0 py-4 bg-black md:hidden lg:hidden z-20 max-h-screen;
+
+    .navbar{
+        @apply flex justify-between items-center text-white;
+
+        h1{
+            @apply text-2xl font-bold uppercase;
+        }
+        .menu-icon{
+            @apply cursor-pointer;
+        }
+    }
+
+    .navmenu{
+        @apply w-full h-fit bg-black absolute top-[64px] right-0 z-10 overflow-y-scroll;
+
+        .-menu{
+            @apply flex flex-col my-4 px-4 text-right gap-2;
+
+            .-items{
+                @apply text-white text-base uppercase py-2 flex items-center justify-end;
+            }
+        }
+
+        .-menulv2{
+            @apply w-full h-fit bg-gray-800 z-10 flex flex-col gap-2 px-4 overflow-y-scroll max-h-[200px];
+
+            .-items{
+                @apply text-white text-base uppercase py-2 flex items-center justify-end;
+            }
+        }
+    }
+}
+
+.overlay{
+    @apply absolute bottom-0 left-0 right-0 bg-gray-900/50 w-full h-full;
+}

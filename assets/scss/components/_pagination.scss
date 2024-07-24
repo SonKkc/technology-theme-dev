@@ -1,0 +1,15 @@
+.pagination{
+    @apply w-full flex items-center justify-center border rounded border-gray-400 p-2 mt-6 max-sm:rounded-lg;
+
+    p{
+        @apply text-gray-700;
+    }
+}
+
+.pagination_2{
+    @apply flex items-center gap-2 mt-6 w-full;
+
+    .-btn{
+        @apply w-full flex items-center justify-center border rounded border-gray-400 p-2;
+    }
+}

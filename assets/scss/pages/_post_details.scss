@@ -1,0 +1,93 @@
+
+
+.post{
+    font-family:'Times New Roman', Times, serif;
+}
+
+.post{
+    @apply py-10 border-b border-black;
+
+    .-title{
+        @apply flex flex-col w-7/12 max-sm:w-11/12 md:w-10/12 pb-10 border-b border-black;
+
+        h1{
+            @apply text-4xl font-extrabold max-sm:text-2xl;
+        }
+
+        .-author{
+            @apply text-sm font-light pt-4;
+
+            a{
+                @apply text-blue-500 underline;
+            }
+        }
+    }
+
+    .-content{
+        h1{
+            @apply text-4xl font-extrabold max-sm:text-2xl;
+        }
+
+        h2{
+            @apply text-3xl font-bold pt-4 max-sm:text-2xl;
+        }
+
+        h3{
+            @apply text-xl font-bold pt-4;
+        }
+       
+        p{
+            @apply pt-4 text-xl;
+        }
+
+        img{
+            @apply w-full h-auto pt-4 object-cover;
+        }
+
+        blockquote{
+            @apply italic ps-4 pt-4 text-xl;
+        }
+
+        .-parapart{
+            @apply pt-4;
+            p{
+                @apply p-0 text-xl;
+            }
+
+            h3{
+                @apply text-xl font-bold;
+            }
+        }
+
+        .-list{
+            @apply list-disc pl-8 pt-4;
+
+            li{
+                span{
+                    @apply font-semibold;
+                }
+            }
+        }
+
+        ul{
+            @apply list-disc pl-8 pt-4;
+
+            li{
+                span{
+                    @apply font-semibold;
+                }
+            } 
+        }
+
+        .-italic{
+            @apply italic pt-4 text-xl;
+        }
+    }
+}
+
+.recommended{
+    
+    h2{
+        @apply text-3xl font-bold pt-10 pb-4;
+    }
+}

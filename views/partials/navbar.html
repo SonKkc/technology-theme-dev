@@ -1,0 +1,105 @@
+<div class="relative" x-data="{navbarMobile: false, closeBtnMobile: false, openBtnMobile: true}">
+    <div class="back-black" x-data="{openNavbarDropDown: false, btnNavbarDropDown: true}">
+        <div class="navbar_base">
+            <div class="my_container pt-4">
+                <div class="top-page flex">
+                    <a href="{{ link_to(website_category) }}">Technologylife</a>
+                    <div class="-block"></div>
+                </div>
+            </div>
+            <div class="navbar">
+                <div class="_menu">
+                    {% set mainMenu = menu_solve('main') %}
+
+                    {% for menuItem in mainMenu %}
+                    {% if not menuItem.items %}
+                    <a href="{{ menuItem.link }}"  target="{{ menuItem.new_tab ? '_blank' : '' }}" class="-items">{{ menuItem.text }}</a>
+                    {% else %}
+                    <div href="" class="-items" x-on:click="openNavbarDropDown = !openNavbarDropDown, btnNavbarDropDown = false">
+                        
+                        <div class="flex items-center justify-between">
+                            {{ menuItem.text }}
+                            <svg x-show="btnNavbarDropDown" class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 9-7 7-7-7" />
+                            </svg>
+                            <svg x-cloak x-show="openNavbarDropDown" class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+                            </svg>      
+                        </div>
+    
+                        <div x-cloak class="-dropdown" x-show="openNavbarDropDown"
+                            x-on:click.outside="openNavbarDropDown = false, btnNavbarDropDown = true">
+                            {% for subMenuItem in menuItem.items %}
+                            <a href="{{subMenuItem.link}}"  target="{{ menuItem.new_tab ? '_blank' : '' }}" class="-items">{{ subMenuItem.text }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!--navbar mobile-->
+        <div class="navbar_mobile">
+            <div class="my_container navbar">
+                <h1>Technologylife</h1>
+                <!--btn open menu-->
+                <div x-show="openBtnMobile" class="menu-icon"
+                    x-on:click="navbarMobile = true, openBtnMobile = false, closeBtnMobile = true">
+                    <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
+                            d="M5 7h14M5 12h14M5 17h14" />
+                    </svg>
+                </div>
+                <!--btn close menu-->
+                <div x-cloak x-show="closeBtnMobile" class="menu-icon"
+                    x-on:click="navbarMobile = false, openBtnMobile = true, closeBtnMobile = false">
+                    <svg class="w-8 h-8" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18 17.94 6M18 18 6.06 6" />
+                    </svg>
+                </div>
+            </div>
+            <!--menu mobile-->
+            <div x-cloak x-show="navbarMobile"
+                x-data="{menuLv2:false ,openMobileDropdown: true}"
+                x-on:click.outside="navbarMobile = false, openBtnMobile = true, closeBtnMobile = false" class="navmenu"
+                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="transform opacity-0"
+                x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="transform opacity-100" x-transition:leave-end="transform opacity-0">
+                <div class="-menu">
+                    {% for menuItem in mainMenu %}
+                    {% if not menuItem.items %}
+                    <a href="{{ menuItem.link }}"  target="{{ menuItem.new_tab ? '_blank' : '' }}" class="-items">{{ menuItem.text }}</a>
+                    {% else %}
+                    <div class="-items" x-on:click="menuLv2 = true, openMobileDropdown = !openMobileDropdown">
+                        <svg x-show="openMobileDropdown" class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 9-7 7-7-7" />
+                        </svg>
+                        <svg x-cloak x-show="menuLv2" class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 15 7-7 7 7"/>
+                        </svg>                      
+                        <span>{{ menuItem.text }}</span>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% for menuItem in mainMenu %}
+                {% if menuItem.items %}
+                {% for subMenuItem in menuItem.items %}
+                <div x-show="menuLv2" class="-menulv2" x-on:click.outside="menuLv2 = false, openMobileDropdown = true">
+                    <a href="{{subMenuItem.link}}"  target="{{ menuItem.new_tab ? '_blank' : '' }}" class="-items">{{ subMenuItem.text }}</a>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
