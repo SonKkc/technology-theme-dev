@@ -1,0 +1,15 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+
+<!--error page-->
+<div class="my_container py-[175px]">
+    <div class="error flex flex-col items-center gap-4">
+        <h1 class="text-7xl font-semibold pt-10 pb-5">{{ httpStatusCode }}</h1>
+        <p class="text-3xl font-semibold">{{ message }}</p>
+        <p class="text-lg">The page you are looking for might have been removed, had its name changed or is temporarily
+            unavailable.</p>
+        <a href="/" class="py-2 px-4 rounded-full border-0 bg-red-500 text-white font-semibold ">Back to home</a>
+    </div>
+
+{% endblock %}

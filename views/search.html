@@ -43,13 +43,19 @@
 
     </div>
     
+    {% if resources %}
     <div class="">
         {% include 'components/list-card.html' with { resources: listData.getResources(), count: listData.getResourcesCount()} %}
     </div>
+    {% else %}
+    <div class="my_container">
+        <p class="text-center">No results found</p>
+    </div>
+    {% endif %}
 
     <!--Pagination-->
-    <div class="">
-        {% include 'components/pagination.html' %}
+    <div class="my_container">
+       {% include 'components/pagination_tailwind.html' with { resources: listData.getResources(),
+        count: listData.getResourcesCount() } %}
     </div>
-</div>
 {% endblock %}

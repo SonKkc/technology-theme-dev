@@ -4,6 +4,11 @@
 
 <div class="my_container py-10">
     <!--post detail-->
+    {% set cats = model_relation(post, 'websiteCategories') %}
+        <p class="">{{ cats|length }}</p>
+    {% for websiteTag in model_relation(post, 'websiteTags') %}
+        <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>,
+    {% endfor %}
     <div class="post">
         <div class="-title">
             <h1 class="">{{ post.title }}</h1>
@@ -23,5 +28,11 @@
         {% include 'components/recommend-list.html' with { resources: listData.getResource() }%}
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('{{ cats|length }}');
+    });
+</script>
+
 
 {% endblock %}

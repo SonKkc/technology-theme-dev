@@ -1,0 +1,10 @@
+{% if count > 0 %}
+{%
+    include 'components/pagination.html'
+        with {
+            paginationClass: 'flex items-center justify-center mt-4',
+            paginationItemClass: 'w-10 h-10 leading-10 text-center rounded-full',
+            paginationItemActiveClass: 'bg-gray-800 text-white'
+        }
+%}
+{% endif %}
