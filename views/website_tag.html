@@ -3,55 +3,44 @@
 {% block content %}
 <div class="main">
     <!--Page title section-->
-    <div class="my_container" x-data="{openSearch: false, searchClose: true}">
-        <!--search desktop-->
-        <div class="page_name-n-search">
-            <div class="-title">{{ websiteTag.name }}</div>
-            <form action="{{ link_search() }}" class="-searchbar">
-                <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
-                <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                    </svg>
-                </button>
-            </form>
-        </div>
-        <!--search mobile-->
-        <div class="page_name-n-search_mobile">
-            <div x-show="searchClose" class="-title">{{ websiteTag.name }}</div>
-            <!--btn open search-->
-            <button x-show="searchClose" x-on:click="openSearch = true, searchClose = false" class="-btn"><svg
-                    class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                </svg>
-            </button>
-            <!--search bar-->
-            <div x-cloak x-show="openSearch" x-on:click.outside="openSearch = false, searchClose = true"
-                class="-searchbar">
-                <input type="text" placeholder="Search for news" class="-input">
-                <form action="{{ link_search() }}" x-cloak x-show="openSearch" x-on:click.outside="openSearch = false, searchClose = true"
-                class="-searchbar">
-                <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
-                <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                    </svg>
-                </button>
-            </form>
-            </div>
-        </div>
+    {% include 'components/search-bar.html' %}
 
-    </div>
     {% set latestData = listData.getResources() %}
+    {% set today = "now"|date("F j, Y") %}
+    
+    {% set page = app.request.query.get('page') %}
+    {% if page != 1 %}
+    <div class="my_container section_grid-col-1">
+        {% for latestItem in latestData %} 
+        <!--items-->
+        <a href="{{ latestItem.getLink() }}" class="-items">
+            {% set thumbnailFile = latestItem.getThumbnailFile() %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <div class="-content">
+                <div class="-title">
+                    {{ latestItem.getTitle() }}
+                </div>
+                <div class="-author">
+                    <span>Paul Sawers</span>
+                    <span>.</span>
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
+    {% else %}
     <!--Category latest section-->
     <div class="my_container head_page_section">
         {% set latestData1 = latestData|slice(0, 3) %}
         {% for latestItem in latestData1 %} 
-        <a href="#" class="-items">
+        <a href="{{ latestItem.getLink() }}" class="-items">
             {% set thumbnailFile = latestItem.getThumbnailFile() %}
             <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
             <div class="-content">
@@ -59,7 +48,13 @@
                 <div class="-author">
                     <span>Brian</span>
                     <span>.</span>
-                    <span>Today</span>
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
                 </div>
             </div>
         </a>
@@ -71,7 +66,7 @@
         {% set latestData2 = latestData|slice(3, 10) %}
         {% for latestItem in latestData2 %} 
         <!--items-->
-        <a href="#" class="-items">
+        <a href="{{ latestItem.getLink() }}" class="-items">
             {% set thumbnailFile = latestItem.getThumbnailFile() %}
             <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
             <div class="-content">
@@ -81,19 +76,19 @@
                 <div class="-author">
                     <span>Paul Sawers</span>
                     <span>.</span>
-                    <span>Today</span>
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
                 </div>
             </div>
         </a>
         {% endfor %} 
     </div>
-
-    <!--Pagination-->
-    <div class="my_container">
-        <a href="cate_page-2.html" class="pagination">
-            <p class="">Next page</p>
-        </a>
-    </div>
+    {% endif %}
 
     <!--Pagination-->
     <div class="my_container">
@@ -101,4 +96,9 @@
          count: listData.getResourcesCount() } %}
      </div>
 </div>
+{# <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('{{ latestData|raw }}');
+    });
+</script> #}
 {% endblock %}

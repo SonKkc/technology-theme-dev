@@ -10,8 +10,8 @@
             <div class="navbar">
                 <div class="_menu">
                     {% set mainMenu = menu_solve('main') %}
-
                     {% for menuItem in mainMenu %}
+
                     {% if not menuItem.items %}
                     <a href="{{ menuItem.link }}"  target="{{ menuItem.new_tab ? '_blank' : '' }}" class="-items">{{ menuItem.text }}</a>
                     {% else %}

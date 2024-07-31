@@ -2,9 +2,11 @@
 {%
     include 'components/pagination.html'
         with {
-            paginationClass: 'flex items-center justify-center mt-4',
-            paginationItemClass: 'w-10 h-10 leading-10 text-center rounded-full',
-            paginationItemActiveClass: 'bg-gray-800 text-white'
+            nextText: 'Next page',
+            previousText: 'Previous page',
+            paginationClass: 'custom-pagination flex items-center gap-2 mt-6 w-full justify-center mt-4',
+            paginationItemLinkClass:'w-full flex items-center justify-center border rounded border-gray-400 p-2', 
+            paginationItemLinkActiveClass: 'hidden active-link',
         }
 %}
 {% endif %}

@@ -13,3 +13,26 @@
         @apply w-full flex items-center justify-center border rounded border-gray-400 p-2;
     }
 }
+
+.custom-pagination{
+    li{
+        @apply hidden;
+    }
+
+    li:first-child{
+        @apply block w-full;
+        
+        a{
+            @apply w-full;
+        }
+    }
+
+    li:last-child{
+        @apply block w-full;
+
+        a{
+            @apply w-full;
+        }
+    }
+
+}

@@ -1,0 +1,39 @@
+<div class="my_container" x-data="{openSearch: false, searchClose: true}">
+    <!--search desktop-->
+    <div class="page_name-n-search">
+        <div class="-title">{{ pageDescription ?: websiteTag.name }}</div>
+        <form action="{{ link_search() }}" class="-searchbar">
+            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
+            <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+    <!--search mobile-->
+    <div class="page_name-n-search_mobile">
+        <div x-show="searchClose" class="-title">{{ pageDescription ?: websiteTag.name }}</div>
+        <!--btn open search-->
+        <button x-show="searchClose" x-on:click="openSearch = true, searchClose = false" class="-btn"><svg
+                class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+            </svg>
+        </button>
+        <!--search bar-->
+        <form action="{{ link_search() }}" x-cloak x-show="openSearch" x-on:click.outside="openSearch = false, searchClose = true"
+            class="-searchbar">
+            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
+            <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                </svg>
+            </button>
+        </form>
+    </div>
+
+</div>

@@ -63,7 +63,7 @@
             {% set latestDataRow = latestData|slice(6, 9) %}
             {% for latestItem in latestDataRow %} 
             <!--items-->
-            <a href="#" class="-items">
+            <a href="{{ latestItem.getLink() }}" class="-items">
                 {% set thumbnailFile = latestItem.getThumbnailFile() %}
                 <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
                 <p class="-title">{{ latestItem.getTitle() }} </p>

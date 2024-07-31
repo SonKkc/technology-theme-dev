@@ -4,18 +4,23 @@
 
 <div class="my_container py-10">
     <!--post detail-->
-    {% set cats = model_relation(post, 'websiteCategories') %}
-        <p class="">{{ cats|length }}</p>
-    {% for websiteTag in model_relation(post, 'websiteTags') %}
-        <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>,
-    {% endfor %}
     <div class="post">
         <div class="-title">
             <h1 class="">{{ post.title }}</h1>
             <div class="-author">
-                <span class="">By</span>
-                <a href="" class="">Brian Heater</a>
-                <span class="">June 20, 2024</span>
+                <span>By</span>
+                <a href="#">Brian Heater</a>
+                <span>
+                    {% if latestItem.created_at|date("F j, Y") == today %}
+                        Today
+                    {% else %}
+                        {{ latestItem.created_at|date("F j, Y") }}
+                    {% endif %}
+                </span>
+                <br/>
+                {% for websiteTag in model_relation(post, 'websiteTags') %}
+                    <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>,
+                {% endfor %}
             </div>
         </div>
         <div class="-content">
@@ -30,6 +35,7 @@
 </div>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        {% set cats = model_relation(post, 'websiteCategories') %}
         console.log('{{ cats|length }}');
     });
 </script>
