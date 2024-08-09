@@ -8,34 +8,9 @@
     {% set latestData = listData.getResources() %}
     {% set today = "now"|date("F j, Y") %}
     
-    {% set page = app.request.query.get('page') %}
-    {% if page != 1 %}
-    <div class="my_container section_grid-col-1">
-        {% for latestItem in latestData %} 
-        <!--items-->
-        <a href="{{ latestItem.getLink() }}" class="-items">
-            {% set thumbnailFile = latestItem.getThumbnailFile() %}
-            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
-            <div class="-content">
-                <div class="-title">
-                    {{ latestItem.getTitle() }}
-                </div>
-                <div class="-author">
-                    <span>Paul Sawers</span>
-                    <span>.</span>
-                    <span>
-                        {% if latestItem.created_at|date("F j, Y") == today %}
-                            Today
-                        {% else %}
-                            {{ latestItem.created_at|date("F j, Y") }}
-                        {% endif %}
-                    </span>
-                </div>
-            </div>
-        </a>
-        {% endfor %} 
-    </div>
-    {% else %}
+    {% set page = request.query('page') %}
+    {% if page is empty or page == 1  %}
+    
     <!--Category latest section-->
     <div class="my_container head_page_section">
         {% set latestData1 = latestData|slice(0, 3) %}
@@ -88,6 +63,32 @@
         </a>
         {% endfor %} 
     </div>
+    {% else %}
+    <div class="my_container section_grid-col-1">
+        {% for latestItem in latestData %} 
+        <!--items-->
+        <a href="{{ latestItem.getLink() }}" class="-items">
+            {% set thumbnailFile = latestItem.getThumbnailFile() %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <div class="-content">
+                <div class="-title">
+                    {{ latestItem.getTitle() }}
+                </div>
+                <div class="-author">
+                    <span>Paul Sawers</span>
+                    <span>.</span>
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
     {% endif %}
 
     <!--Pagination-->
@@ -96,9 +97,6 @@
          count: listData.getResourcesCount() } %}
      </div>
 </div>
-{# <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log('{{ latestData|raw }}');
-    });
-</script> #}
+
+
 {% endblock %}

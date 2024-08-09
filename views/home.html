@@ -3,23 +3,6 @@
 {% block content %}
     <!-- Main-->
     <div class="main">
-
-    {# Lấy resource đầu tiên thuộc loại WebsiteCategory để làm ví dụ #}
-    {# {% set categoryResource = null %}
-    {% for resource in listData.getResources() %}
-        {% if resource.getModel() == 'Post' %}
-            {% set categoryResource = resource %}
-        {% endif %}
-
-    {% endfor %} #}
-
-    {# Hiển thị nút bấm nếu tìm thấy categoryResource #}
-    {# {% if categoryResource %}
-        <a href="{{ link_to(categoryResource) }}" class="btn btn-primary">Chuyển tới trang Category</a>
-    {% else %}
-        <p>Không tìm thấy resource loại WebsiteCategory.</p>
-    {% endif %} #}
-
         <!--Lastest News-->
         {% set latestData = listData.getResources() %}
         <div class="my_container section_flex border_bot">
@@ -72,30 +55,54 @@
         </div>
     
         <!--divide-->
-        <div class="divide">
+        {# <div class="divide">
             <div class="_container">
                 <div class="-line1"></div>
                 {% set category = WebsiteCategory.getResources() %}
                 <a href="{{ link_to(category) }}" class="-text primary">See all latest news</a>
                 <div class="-line2"></div>
             </div>
-        </div>
+        </div> #}
 
         <!--newsletter-->
         <div>
             {% include 'components/news-letter.html' %}
         </div>
-
+        
         <!--Category card-->
+        {%
+            set query = multikey_filter_post_query()
+            .where('visibility', '=', 'public')
+
+            .setFilterKeyMatchingType('all')
+            .sortBy('created_at')
+            .sortDesc()
+            .setLimit(4)
+        %}
+        {% set posts = multikey_filter_get_posts(query) %}
         <div>
-            {% include 'components/list-card-home.html' with { resources: listData.getResources() } %}
+            {% include 'components/list-card-home.html' with { resources: posts } %}
         </div>
+
+        {%
+            set query = multikey_filter_post_query()
+            .where('visibility', '=', 'public')
+            .setFilterKeyMatchingType('all')
+            .sortBy('created_at')
+            .sortDesc()
+            .setLimit(4)
+        %}
+        {% set cats = multikey_filter_get_posts(query) %}
+        <div>
+            {% include 'components/list-card-home.html' with { resources: cats } %}
+        </div>
+        
 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('{{ categoryResource.slug }}');
+           console.log('Hello');
         });
     </script>
 

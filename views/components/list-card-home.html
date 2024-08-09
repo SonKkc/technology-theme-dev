@@ -1,5 +1,7 @@
 
 {% if resources %}
+
+{# <div id="posts-container"></div> #}
 <div class="my_container py-10 border_top">
     <a href="#" class="section_title hover:underline">
         <p class="">Deeptech</p>
@@ -15,16 +17,16 @@
         {% set card1 = resources|slice(0,1) %}
         <div class="_main">
             {% for cardItem in card1 %}
-            <a href="{{ cardItem.getLink() }}" class="-items">
-                {% set thumbnailFile = cardItem.getThumbnailFile() %}
+            <a href="{{ cardItem.slug }}" class="-items">
+                {% set thumbnailFile = model_relation(cardItem, 'thumbnailFile') %}
                 <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="-img">
                 <div class="-title">
                     <p class="">
-                      {{ cardItem.getTitle() }}  
+                      {{ cardItem.title }}  
                     </p>
                 </div>
                 <div class="-content">
-                    <p>{{ cardItem.getDescription() }}</p>
+                    <p>{{ cardItem.description }}</p>
                 </div>
             </a>
             {% endfor %}
@@ -33,15 +35,38 @@
         {% set listCard = resources|slice(1,3) %}
         <div class="_right">
             {% for cardItem in listCard %}
-            <a href="{{ cardItem.getLink() }}" class="-items">
-                {% set thumbnailFile = cardItem.getThumbnailFile() %}
+            <a href="{{ cardItem.slug }}" class="-items">
+                {% set thumbnailFile = model_relation(cardItem, 'thumbnailFile') %}
                 <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
                 <p class="-title">
-                    {{ cardItem.getTitle() }}
+                    {{ cardItem.title }}
                 </p>
             </a>
             {% endfor %}
         </div>
     </div>
 </div>
+
+{# <script type="module">
+    import { fetchPosts } from "{{ link_asset('js/main.js') }}?t={{ time() }}";
+    (async () => {
+        const endpoint = '';
+        const page = 1;
+        const limit = 16;
+        const ajax = 1;
+    
+        const posts = await fetchPosts(endpoint, page, limit, ajax);
+        console.log('Fetched posts:', posts);
+    
+        // Gắn dữ liệu vào HTML
+        const postsContainer = document.getElementById('posts-container');
+        posts.data.forEach(post => {
+            const postElement = document.createElement('div');
+            postElement.innerHTML = `
+            
+            `;
+            postsContainer.appendChild(postElement);
+        });
+    })();
+</script> #}
 {% endif %}

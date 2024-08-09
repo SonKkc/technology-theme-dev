@@ -3,7 +3,7 @@
     {% set resource = resources|slice(3, 10) %}
     {% for listItem in resource %} 
     <!--items-->
-    <a href="#" class="-items">
+    <a href="{{ listItem.getLink() }}" class="-items">
         {% set thumbnailFile = listItem.getThumbnailFile() %}
         <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
         <div class="-content">

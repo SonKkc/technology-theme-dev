@@ -50,7 +50,7 @@
     .navbar{
         @apply flex justify-between items-center text-white;
 
-        h1{
+        a{
             @apply text-2xl font-bold uppercase;
         }
         .menu-icon{

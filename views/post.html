@@ -30,15 +30,10 @@
 
     <!--recommended-->
     <div>
-        {% include 'components/recommend-list.html' with { resources: listData.getResource() }%}
+        {% include 'components/recommend-list.html' %}
     </div>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        {% set cats = model_relation(post, 'websiteCategories') %}
-        console.log('{{ cats|length }}');
-    });
-</script>
+{% set cats = model_relation(post, 'websiteTagGroups') %}
 
 
 {% endblock %}
