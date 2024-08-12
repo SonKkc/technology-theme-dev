@@ -73,7 +73,6 @@
         {%
             set query = multikey_filter_post_query()
             .where('visibility', '=', 'public')
-
             .setFilterKeyMatchingType('all')
             .sortBy('created_at')
             .sortDesc()
@@ -81,7 +80,7 @@
         %}
         {% set posts = multikey_filter_get_posts(query) %}
         <div>
-            {% include 'components/list-card-home.html' with { resources: posts } %}
+            {% include 'components/list-card-tag.html' with { resources: posts } %}
         </div>
 
         {%
@@ -94,17 +93,17 @@
         %}
         {% set cats = multikey_filter_get_posts(query) %}
         <div>
-            {% include 'components/list-card-home.html' with { resources: cats } %}
+            {% include 'components/list-card-tag.html' with { resources: cats } %}
         </div>
         
 
     </div>
 
-    <script>
+    {# <script>
         document.addEventListener('DOMContentLoaded', () => {
            console.log('Hello');
         });
-    </script>
+    </script> #}
 
     
 {% endblock %}
