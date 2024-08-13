@@ -52,7 +52,7 @@ body {
             }
     
             .-title{
-                @apply font-semibold line-clamp-5 text-lg max-sm:text-sm w-full;
+                @apply flex-1 font-semibold line-clamp-5 text-lg max-sm:text-sm w-full;
             }
         }
     

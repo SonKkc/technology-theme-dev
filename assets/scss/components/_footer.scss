@@ -8,7 +8,32 @@
         }
 
         .-items{
-            @apply flex items-center justify-around flex-wrap gap-4 text-gray-400;
+            @apply flex items-center justify-around flex-wrap gap-4 text-gray-400 text-sm;
+
+            a:hover{
+                @apply text-gray-300;
+            }
+
+            div:hover{
+                @apply text-gray-300;
+
+                p{
+                    @apply text-gray-300;
+                }
+            }
+
+            div{
+                @apply flex gap-2 items-center cursor-pointer;
+                
+                p{
+                    @apply text-gray-400;
+                }
+               
+            }
+        }
+
+        .-submenu{
+            @apply flex items-center justify-center gap-4 text-gray-400 text-sm;
 
             a:hover{
                 @apply text-gray-300;

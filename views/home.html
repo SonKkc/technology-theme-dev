@@ -2,7 +2,7 @@
 
 {% block content %}
     <!-- Main-->
-    <div class="main">
+    <br class="main">
         <!--Lastest News-->
         {% set latestData = listData.getResources() %}
         <div class="my_container section_flex border_bot">
@@ -70,33 +70,43 @@
         </div>
         
         <!--Category card-->
-        {%
-            set query = multikey_filter_post_query()
-            .where('visibility', '=', 'public')
-            .setFilterKeyMatchingType('all')
-            .sortBy('created_at')
-            .sortDesc()
-            .setLimit(4)
-        %}
-        {% set posts = multikey_filter_get_posts(query) %}
-        <div>
-            {% include 'components/list-card-tag.html' with { resources: posts } %}
-        </div>
+        {% set data = website.getMetaValue('home-sections') %}
+        {% set tags = data|split(',') %}
 
-        {%
-            set query = multikey_filter_post_query()
-            .where('visibility', '=', 'public')
-            .setFilterKeyMatchingType('all')
-            .sortBy('created_at')
-            .sortDesc()
-            .setLimit(4)
-        %}
-        {% set cats = multikey_filter_get_posts(query) %}
-        <div>
-            {% include 'components/list-card-tag.html' with { resources: cats } %}
-        </div>
+        {% for tag in tags %}
+            {% set parts = tag|split(':') %}
+            {% if parts|length > 1 %}
+                {% set tag_name = parts[0]|trim %}
+                {% set ids = parts[1]|trim|split(' ') %} {# Tách các ID bằng khoảng trắng #}
+                {% set previous_tag_name = tag_name %}
+            {% else %}
+            {% set tag_name = previous_tag_name %}
+                {% set ids = parts[0]|trim|split(' ') %}
+            {% endif %}
+
+            {% for id in ids %}
+                <div>
+                    {%
+                        set query = multikey_filter_post_query()
+                        .setFilterKeys([id])
+                        .where('visibility', '=', 'public')
+                        .setFilterKeyMatchingType('all')
+                        .sortBy('created_at')
+                        .sortDesc()
+                        .setLimit(24)
+                    %}
+
+                    {% set cats = multikey_filter_get_posts(query) %}
+                    
+                    {# Kiểm tra và in kết quả của cats #}
+                    {% if cats is not empty %}
+                        {% include 'components/list-card-tag.html' with { resources: cats, tag_name: tag_name } %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
         
-
     </div>
 
     {# <script>
