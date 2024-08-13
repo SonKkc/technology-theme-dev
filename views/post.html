@@ -8,8 +8,8 @@
         <div class="-title">
             <h1 class="">{{ post.title }}</h1>
             <div class="-author">
-                <span>By</span>
-                <a href="#">Brian Heater</a>
+                {# <span>By</span>
+                <a href="#">Brian Heater</a> #}
                 <span>
                     {% if latestItem.created_at|date("F j, Y") == today %}
                         Today
@@ -19,7 +19,8 @@
                 </span>
                 <br/>
                 {% for websiteTag in model_relation(post, 'websiteTags') %}
-                    <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>,
+                    <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>
+                    {% if not loop.last %}, {% endif %}
                 {% endfor %}
             </div>
         </div>
