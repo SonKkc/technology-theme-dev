@@ -78,13 +78,13 @@
             {% if parts|length > 1 %}
                 {% set tag_name = parts[0]|trim %}
                 {% set ids = parts[1]|trim|split(' ') %}
-                {% set previous_tag_name = tag_name %}
             {% else %}
-            {% set tag_name = previous_tag_name %}
-                {% set ids = parts[0]|trim|split(' ') %}
+            {% set tag_name = '' %}
+            {% set ids = parts[0]|trim|split(' ') %}
             {% endif %}
 
             {% for id in ids %}
+            {% set current_tag_name = (tag_name != '') ? tag_name : id %}
                 <div>
                     {%
                         set query = multikey_filter_post_query()
@@ -99,7 +99,7 @@
                     {% set cats = multikey_filter_get_posts(query) %}
                     
                     {% if cats is not empty %}
-                        {% include 'components/list-card-tag.html' with { resources: cats, tag_name: tag_name } %}
+                        {% include 'components/list-card-tag.html' with { resources: cats, tag_name: current_tag_name } %}
                     {% endif %}
                 </div>
             {% endfor %}
