@@ -77,7 +77,7 @@
             {% set parts = tag|split(':') %}
             {% if parts|length > 1 %}
                 {% set tag_name = parts[0]|trim %}
-                {% set ids = parts[1]|trim|split(' ') %} {# Tách các ID bằng khoảng trắng #}
+                {% set ids = parts[1]|trim|split(' ') %}
                 {% set previous_tag_name = tag_name %}
             {% else %}
             {% set tag_name = previous_tag_name %}
@@ -98,7 +98,6 @@
 
                     {% set cats = multikey_filter_get_posts(query) %}
                     
-                    {# Kiểm tra và in kết quả của cats #}
                     {% if cats is not empty %}
                         {% include 'components/list-card-tag.html' with { resources: cats, tag_name: tag_name } %}
                     {% endif %}
