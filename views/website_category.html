@@ -1,0 +1,102 @@
+{% extends 'layouts/default.html' %}
+
+{% block content %}
+<div class="main">
+    <!--Page title section-->
+    {% include 'components/search-bar.html' %}
+
+    {% set latestData = listData.getResources() %}
+    {% set today = "now"|date("F j, Y") %}
+    
+    {% set page = request.query('page') %}
+    {% if page is empty or page == 1  %}
+    
+    <!--Category latest section-->
+    <div class="my_container head_page_section">
+        {% set latestData1 = latestData|slice(0, 3) %}
+        {% for latestItem in latestData1 %} 
+        <a href="{{ latestItem.getLink() }}" class="-items">
+            {% set thumbnailFile = latestItem.getThumbnailFile() %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <div class="-content">
+                <h2>{{ latestItem.getTitle() }}</h2>
+                <div class="-author">
+                    {# <span>Brian</span>
+                    <span>.</span> #}
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
+
+    <!--Category list page-->
+    <div class="my_container section_grid-col-1">
+        {% set latestData2 = latestData|slice(3, 10) %}
+        {% for latestItem in latestData2 %} 
+        <!--items-->
+        <a href="{{ latestItem.getLink() }}" class="-items">
+            {% set thumbnailFile = latestItem.getThumbnailFile() %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <div class="-content">
+                <div class="-title">
+                    {{ latestItem.getTitle() }}
+                </div>
+                <div class="-author">
+                    {# <span>Paul Sawers</span>
+                    <span>.</span> #}
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
+    {% else %}
+    <div class="my_container section_grid-col-1">
+        {% for latestItem in latestData %} 
+        <!--items-->
+        <a href="{{ latestItem.getLink() }}" class="-items">
+            {% set thumbnailFile = latestItem.getThumbnailFile() %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <div class="-content">
+                <div class="-title">
+                    {{ latestItem.getTitle() }}
+                </div>
+                <div class="-author">
+                    {# <span>Paul Sawers</span>
+                    <span>.</span> #}
+                    <span>
+                        {% if latestItem.created_at|date("F j, Y") == today %}
+                            Today
+                        {% else %}
+                            {{ latestItem.created_at|date("F j, Y") }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
+    {% endif %}
+
+    <!--Pagination-->
+    <div class="my_container">
+        {% include 'components/pagination_tailwind.html' with { resources: listData.getResources(),
+         count: listData.getResourcesCount() } %}
+     </div>
+</div>
+
+
+{% endblock %}

@@ -2,12 +2,11 @@
 
 {% block content %}
     <!-- Main-->
-    <br class="main">
+    <div class="main">
         <!--Lastest News-->
         {% set latestData = listData.getResources() %}
         <div class="my_container section_flex border_bot">
             <div class="outstanding">
-
                 {% set latestData1 = latestData|slice(0, 1) %}
                 {% for latestItem in latestData1 %} 
                 <a href="{{ latestItem.getLink() }}" class="-items">
@@ -42,10 +41,10 @@
             </div>
         </div>
         <!--latest row-->
+        {% set latestDataRow = latestData|slice(6,9) %}
         <div class="my_container section_grid latest-row">
-            {% set latestDataRow = latestData|slice(6, 9) %}
             {% for latestItem in latestDataRow %} 
-            <!--items-->
+            <!-- items -->
             <a href="{{ latestItem.getLink() }}" class="-items">
                 {% set thumbnailFile = latestItem.getThumbnailFile() %}
                 <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
@@ -84,6 +83,7 @@
             {% endif %}
 
             {% for id in ids %}
+            {% set catResource = website_category_find_by_id(id)%}
             {% set current_tag_name = (tag_name != '') ? tag_name : id %}
                 <div>
                     {%
@@ -99,7 +99,7 @@
                     {% set cats = multikey_filter_get_posts(query) %}
                     
                     {% if cats is not empty %}
-                        {% include 'components/list-card-tag.html' with { resources: cats, tag_name: current_tag_name } %}
+                        {% include 'components/list-card-tag.html' with { resources: cats, tag_name: current_tag_name, catLink: catResource } %}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -107,12 +107,4 @@
 
         
     </div>
-
-    {# <script>
-        document.addEventListener('DOMContentLoaded', () => {
-           console.log('Hello');
-        });
-    </script> #}
-
-    
 {% endblock %}

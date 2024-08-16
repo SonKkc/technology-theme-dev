@@ -1,0 +1,17 @@
+{% if resources %}
+<div class="my_container section_grid latest-row">
+    {% set latestDataRow = resources %}
+    {% for latestItem in latestDataRow %} 
+    <!--items-->
+    <a href="{{ latestItem.getLink() }}" class="-items">
+        {% set thumbnailFile = latestItem.getThumbnailFile() %}
+        <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+        <p class="-title">{{ latestItem.getTitle() }} </p>
+    </a>
+    {% endfor %}
+    <div class="my_container">
+        {% include 'components/pagination_tailwind.html' with { resources: listData.getResources(),
+         count: listData.getResourcesCount() } %}
+     </div>
+</div>
+{% endif %}
