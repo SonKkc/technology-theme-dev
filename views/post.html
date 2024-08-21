@@ -1,7 +1,7 @@
 {% extends 'layouts/default.html' %}
 
 {% block content %}
-
+{% set today = "now"|date("F j, Y") %}
 <div class="my_container py-10">
     <!--post detail-->
     <div class="post">
@@ -11,17 +11,18 @@
                 {# <span>By</span>
                 <a href="#">Brian Heater</a> #}
                 <span>
-                    {% if latestItem.created_at|date("F j, Y") == today %}
+                    {% if post.created_at|date("F j, Y") == today %}
                         Today
                     {% else %}
-                        {{ latestItem.created_at|date("F j, Y") }}
+                        {{ post.created_at|date("F j, Y") }}
                     {% endif %}
                 </span>
                 <br/>
-                {% for websiteTag in model_relation(post, 'websiteTags') %}
-                    <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>
-                    {% if not loop.last %}, {% endif %}
-                {% endfor %}
+                <div class="-tags">
+                    {% for websiteTag in model_relation(post, 'websiteTags') %}
+                        <a href="{{ link_to(websiteTag) }}">{{ websiteTag.name }}</a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="-content">

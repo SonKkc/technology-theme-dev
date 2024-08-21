@@ -3,7 +3,7 @@
     <div class="page_name-n-search">
         <div class="-title">{{ pageDescription ?: pageTitle }}</div>
         <form action="{{ link_search() }}" class="-searchbar">
-            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
+            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input" style="box-shadow: none;">
             <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
@@ -26,7 +26,7 @@
         <!--search bar-->
         <form action="{{ link_search() }}" x-cloak x-show="openSearch" x-on:click.outside="openSearch = false, searchClose = true"
             class="-searchbar">
-            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
+            <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input" style="box-shadow: none;">
             <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2"

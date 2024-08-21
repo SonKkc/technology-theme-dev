@@ -119,11 +119,11 @@ body {
         @apply border border-transparent rounded-full p-2 bg-gray-200 flex items-center gap-2 max-w-[300px];
 
         input{
-            @apply bg-transparent outline-none border-0 w-[300px];
+            @apply bg-transparent border-transparent outline-none pe-0 w-[300px];
         }
 
         .-btn{
-            @apply text-gray-400;
+            @apply text-gray-400 px-2 hover:text-gray-500;
         }
     }
 }

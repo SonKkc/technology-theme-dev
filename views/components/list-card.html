@@ -1,4 +1,5 @@
 {% if resources %}
+{% set today = "now"|date("F j, Y") %}
 <div class="my_container section_grid-col-1">
     {% set resource = resources|slice(3, 10) %}
     {% for listItem in resource %} 
@@ -11,9 +12,13 @@
                 {{ listItem.getTitle() }}
             </div>
             <div class="-author">
-                <span>Paul Sawers</span>
-                <span>.</span>
-                <span>Today</span>
+                {# <span>Paul Sawers</span>
+                <span>.</span> #}
+                {% if listItem.created_at|date("F j, Y") == today %}
+                        Today
+                    {% else %}
+                        {{ listItem.created_at|date("F j, Y") }}
+                {% endif %}
             </div>
         </div>
     </a>

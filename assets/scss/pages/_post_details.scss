@@ -17,9 +17,19 @@
         .-author{
             @apply text-sm font-light pt-4;
 
-            a{
-                @apply text-blue-500 underline;
+            .-tags{
+                @apply flex gap-2 pt-2;
+
+                a{
+                    @apply p-2 bg-gray-600 text-gray-50;
+                }
+
+                a:hover{
+                    @apply bg-gray-700 text-gray-200;
+                }
             }
+
+            
         }
     }
 
@@ -89,5 +99,13 @@
     
     h2{
         @apply text-3xl font-bold pt-10 pb-4;
+    }
+}
+
+.loadmore{
+    @apply w-full flex items-center justify-center;
+
+    .-btn{
+        @apply w-full border rounded border-gray-400 p-2;
     }
 }
