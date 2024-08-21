@@ -1,7 +1,7 @@
 <div class="my_container" x-data="{openSearch: false, searchClose: true}">
     <!--search desktop-->
     <div class="page_name-n-search">
-        <div class="-title">{{ pageDescription ?: websiteTag.name }}</div>
+        <div class="-title">{{ pageDescription ?: pageTitle }}</div>
         <form action="{{ link_search() }}" class="-searchbar">
             <input type="text" name="{{ website.getMetaValue('search-query-name') }}" placeholder="Search for news" class="-input">
             <button type="submit" class="-btn"><svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@
     </div>
     <!--search mobile-->
     <div class="page_name-n-search_mobile">
-        <div x-show="searchClose" class="-title">{{ pageDescription ?: websiteTag.name }}</div>
+        <div x-show="searchClose" class="-title">{{ pageDescription  ?: pageTitle }}</div>
         <!--btn open search-->
         <button x-show="searchClose" x-on:click="openSearch = true, searchClose = false" class="-btn"><svg
                 class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
