@@ -17,8 +17,8 @@
                         menuItem.text }} </a>
                     {% else %}
                     <div href="" class="-items"
-                        x-data="{openNavbarDropDown{{index}}: false, btnNavbarDropDown{{index}}: true}"
-                        x-on:click="openNavbarDropDown{{index}} = !openNavbarDropDown{{index}}, btnNavbarDropDown{{index}} = false">
+                        x-data="{openNavbarDropDown{{index}}: false, btnNavbarDropDown{{index}}: true}" 
+                        @mouseenter="openNavbarDropDown{{index}} = !openNavbarDropDown{{index}}, btnNavbarDropDown{{index}} = false">
 
                         <div class="flex items-center justify-between">
                             {{ menuItem.text }}
@@ -37,7 +37,7 @@
                         </div>
 
                         <div x-cloak class="-dropdown" x-show="openNavbarDropDown{{index}}"
-                            x-on:click.outside="openNavbarDropDown{{index}} = false, btnNavbarDropDown{{index}} = true">
+                            @mouseleave="openNavbarDropDown{{index}} = false, btnNavbarDropDown{{index}} = true">
                             {% for subMenuItem in menuItem.items %}
                             <a href="{{subMenuItem.link}}" target="{{ menuItem.new_tab ? '_blank' : '' }}"
                                 class="-items">{{ subMenuItem.text }}</a>
