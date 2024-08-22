@@ -18,7 +18,8 @@
                     {% else %}
                     <div href="" class="-items"
                         x-data="{openNavbarDropDown{{index}}: false, btnNavbarDropDown{{index}}: true}" 
-                        @mouseenter="openNavbarDropDown{{index}} = !openNavbarDropDown{{index}}, btnNavbarDropDown{{index}} = false">
+                        @mouseenter="openNavbarDropDown{{index}} = true, btnNavbarDropDown{{index}} = false"
+                        @mouseleave="openNavbarDropDown{{index}} = false, btnNavbarDropDown{{index}} = true">
 
                         <div class="flex items-center justify-between">
                             {{ menuItem.text }}
@@ -36,8 +37,7 @@
                             </svg>
                         </div>
 
-                        <div x-cloak class="-dropdown" x-show="openNavbarDropDown{{index}}"
-                            @mouseleave="openNavbarDropDown{{index}} = false, btnNavbarDropDown{{index}} = true">
+                        <div x-cloak class="-dropdown" x-show="openNavbarDropDown{{index}}">
                             {% for subMenuItem in menuItem.items %}
                             <a href="{{subMenuItem.link}}" target="{{ menuItem.new_tab ? '_blank' : '' }}"
                                 class="-items">{{ subMenuItem.text }}</a>
