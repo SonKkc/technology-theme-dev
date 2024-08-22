@@ -19,7 +19,7 @@
     .navbar{
         @apply border-t-2 border-gray-300;
         ._menu{
-            @apply my_container flex flex-1 items-center flex-wrap relative;
+            @apply my_container flex flex-1 items-center flex-wrap relative gap-4;
         
             .-items{
                 @apply flex justify-between items-center text-white uppercase py-4 md:text-sm md:pe-3 md:py-2 relative cursor-pointer;
