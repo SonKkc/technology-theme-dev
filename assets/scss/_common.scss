@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
 
 body {
     font-family: 'Inter', sans-serif;
 }
 .my_container {
-    @apply max-w-6xl mx-auto px-4;
+    @apply max-w-7xl mx-auto md:px-0 lg:px-0 max-sm:px-4;
 }
 
 .main{
     @apply pt-20 max-sm:py-2 max-sm:pt-[64px] pb-10;
+}
+
+.main_cat{
+    @apply pt-10 max-sm:py-2 max-sm:pt-[64px] pb-10
 }
 
 .section_flex{
@@ -75,7 +81,7 @@ body {
 }
 
 .section_title{
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 capitalize;
 
     .-text{
        @apply text-2xl font-semibold

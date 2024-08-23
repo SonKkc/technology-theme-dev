@@ -5,7 +5,7 @@
 .navbar_base{
     @apply max-sm:hidden;
     .top-page {
-      @apply flex flex-col items-center justify-center max-w-2xl mx-auto py-10;
+      @apply flex flex-col items-center justify-center max-w-2xl mx-auto py-10 gap-4;
     
         a {
             @apply text-7xl font-bold text-white uppercase;

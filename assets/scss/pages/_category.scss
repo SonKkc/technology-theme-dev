@@ -5,7 +5,7 @@
         @apply relative;
 
         img{
-            @apply w-full h-64 max-sm:h-[296px] object-cover;
+            @apply w-full h-72 max-sm:h-[296px] object-cover;
         }
 
         .-content{
@@ -26,7 +26,7 @@
         @apply col-span-2 max-sm:col-span-1;
 
         img{
-            @apply h-[537px] object-cover max-sm:h-[296px];
+            @apply h-[595px] object-cover max-sm:h-[296px];
         }
 
         .-content{
