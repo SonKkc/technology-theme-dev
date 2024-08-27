@@ -26,11 +26,11 @@ body {
         .-items{
             @apply flex flex-col gap-4 max-sm:flex-row;
             .-title{
-                @apply flex-1 text-2xl font-bold max-sm:text-lg max-sm:text-base max-sm:line-clamp-6 md:line-clamp-2;
+                @apply flex-1 text-xl font-bold max-sm:text-lg max-sm:text-base max-sm:line-clamp-6 md:line-clamp-2;
             }
         
             .-img{
-                @apply w-full h-96 object-cover max-sm:w-44 max-sm:h-36;
+                @apply w-full h-80 object-cover max-sm:w-44 max-sm:h-36;
             }
         
             .-content{
