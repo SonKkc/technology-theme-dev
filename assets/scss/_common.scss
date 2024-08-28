@@ -139,10 +139,10 @@ body {
 }
 
 .page_name-n-search_mobile{
-    @apply hidden max-sm:flex items-center justify-between py-4 max-h-[68px];
+    @apply hidden max-sm:flex items-center gap-2 justify-between py-4 max-h-[68px];
 
     .-title{
-        @apply font-bold uppercase text-[24px];
+        @apply font-bold uppercase text-[24px] py-2 truncate;
     }
 
     .-searchbar{
