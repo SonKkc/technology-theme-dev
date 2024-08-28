@@ -2,16 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('loading-layout').style.display = 'none';
     document.getElementById('content').style.display = 'block';
-
-    const listItems = document.querySelectorAll("li");
-
-    listItems.forEach(function (li) {
-        const anchor = li.querySelector("a.active-link");
-        if (anchor) {
-            li.style.display = "none";
-            console.log("active link found");
-        }
-    });
 });
 
 

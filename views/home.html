@@ -1,56 +1,47 @@
 {% extends 'layouts/default.html' %}
 
-{% block content %}
+{% block content %} 
+{% set data = website.getMetaValue('home-sections') %}
     <!-- Main-->
     <div class="main">
         <!--Lastest News-->
-        {% set latestData = listData.getResources() %}
-        <div class="my_container section_flex border_bot">
-            <div class="outstanding">
-                {% set latestData1 = latestData|slice(0, 1) %}
-                {% for latestItem in latestData1 %} 
-                <a href="{{ latestItem.getLink() }}" class="-items">
-                    <div class="-title">
-                       {{ latestItem.getTitle() }}
-                    </div>
-                    {% set thumbnailFile = latestItem.getThumbnailFile() %}
-                    <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="-img">
-                    <div class="-content">
-                        <p>{{ latestItem.getDescription() }}</p>
-                    </div>
-                </a>
-                {% endfor %} 
-            </div>
+        {% set tags = data|split(',') %}
+        {% if tags|length > 0 %}
+            {% set first_tag = tags[0] %}
+            {% set parts = first_tag|split(':') %}
+            {% if parts|length > 1 %}
+                {% set tag_name = parts[0]|trim %}
+                {% set ids = parts[1]|trim|split(' ') %}
+            {% else %}
+                {% set tag_name = '' %}
+                {% set ids = parts[0]|trim|split(' ') %}
+            {% endif %}
 
-            <div class="latest-col">
-                <div class="border-b-2 border-black ">
-                    <span class="px-2 py-1 bg-black text-white max-sm:text-sm font-semibold">
-                        Latest
-                    </span>
+            {% for id in ids %}
+                {% set catResource = website_category_find_by_id(id)%}
+                {% set current_tag_name = (tag_name != '') ? tag_name : id %}
+                <div>
+                    {%
+                        set query = multikey_filter_post_query()
+                        .setFilterKeys([id])
+                        .where('visibility', '=', 'public')
+                        .setFilterKeyMatchingType('all')
+                        .sortBy('created_at')
+                        .sortDesc()
+                        .setLimit(24)
+                    %}
+
+                    {% set cats = multikey_filter_get_posts(query) %}
+                    
+                    {% if cats is not empty %}
+                        {% include 'components/latest-news.html' with { resources: cats, tag_name: current_tag_name, catLink: catResource } %}
+                    {% endif %}
                 </div>
-                {% set latestDataCol = latestData|slice(1, 5) %}
-                {% for latestItem in latestDataCol %} 
-                <a href="{{ latestItem.getLink() }}" class="-items">
-                    {% set thumbnailFile = latestItem.getThumbnailFile() %}
-                    <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
-                    <p class="-title">
-                        {{ latestItem.getTitle() }}
-                    </p>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-        <!--latest row-->
-        {% set latestDataRow = latestData|slice(6,9) %}
-        <div class="my_container section_grid latest-row">
-            {% for latestItem in latestDataRow %} 
-            <!-- items -->
-            <a href="{{ latestItem.getLink() }}" class="-items">
-                {% set thumbnailFile = latestItem.getThumbnailFile() %}
-                <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
-                <p class="-title">{{ latestItem.getTitle() }} </p>
-            </a>
             {% endfor %}
+        {% endif %}
+        <!--latest row-->
+        <div class="">
+            {% include 'components/latest-row.html' %}
         </div>
     
         <!--divide-->
@@ -69,10 +60,9 @@
         </div>
         
         <!--Category card-->
-        {% set data = website.getMetaValue('home-sections') %}
         {% set tags = data|split(',') %}
 
-        {% for tag in tags %}
+        {% for tag in tags|slice(1) %}
             {% set parts = tag|split(':') %}
             {% if parts|length > 1 %}
                 {% set tag_name = parts[0]|trim %}

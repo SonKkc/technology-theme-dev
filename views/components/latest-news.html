@@ -1,0 +1,37 @@
+{% if resources %}
+<div class="my_container section_flex border_bot">
+    <div class="outstanding">
+        {% set latestData1 = resources|slice(0, 1) %}
+        {% for latestItem in latestData1 %} 
+        <a href="{{ link_post(latestItem) }}" class="-items">
+            <div class="-title">
+               {{ latestItem.title }}
+            </div>
+            {% set thumbnailFile = model_relation(latestItem, 'thumbnailFile') %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="-img">
+            <div class="-content">
+                <p>{{ latestItem.description }}</p>
+            </div>
+        </a>
+        {% endfor %} 
+    </div>
+
+    <div class="latest-col">
+        <div class="border-b-2 border-black ">
+            <span class="px-2 py-1 bg-black text-white max-sm:text-sm font-semibold">
+                Latest
+            </span>
+        </div>
+        {% set latestDataCol = resources|slice(1, 5) %}
+        {% for latestItem in latestDataCol %} 
+        <a href="{{ link_post(latestItem) }}" class="-items">
+            {% set thumbnailFile = model_relation(latestItem, 'thumbnailFile') %}
+            <img src="{{ thumbnailFile ? image_resize(300, thumbnailFile) }}" alt="" class="">
+            <p class="-title">
+                {{ latestItem.title }}
+            </p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}

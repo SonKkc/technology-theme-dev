@@ -87,6 +87,10 @@ body {
        @apply text-2xl font-semibold max-sm:text-xl md:text-2xl  hover:underline truncate;
     }
 
+    .-text_nudl{
+        @apply text-2xl font-semibold max-sm:text-xl md:text-2xl truncate;
+    }
+
     .angle-right{
         @apply text-gray-500
     }
