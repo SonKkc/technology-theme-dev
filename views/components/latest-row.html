@@ -38,8 +38,14 @@
     
         async function loadPosts() {
             const loadingElement = document.getElementById('loading-ajax');
+            const prevButton = document.getElementById('prev-button');
+            const nextButton = document.getElementById('next-button');
             console.log('Loading element:', loadingElement);
             loadingElement.style.display = 'flex';
+            prevButton.disabled = true;
+            prevButton.classList.add('cursor-not-allowed','text-gray-100');
+            nextButton.disabled = true;
+            nextButton.classList.add('cursor-not-allowed','text-gray-100');
 
             const posts = await fetchPosts(endpoint, page, limit, ajax);
             console.log('Fetched posts:', posts);
@@ -64,7 +70,7 @@
                 `;
                 postsContainer.appendChild(postElement);
             });
-            const prevButton = document.getElementById('prev-button');
+            
             if (page === 1) {
                 prevButton.disabled = true;
                 prevButton.classList.add('cursor-not-allowed','text-gray-100');
@@ -75,7 +81,7 @@
                 prevButton.classList.add('hover:bg-gray-300','text-gray-700');
             }
 
-            const nextButton = document.getElementById('next-button');
+            
             if (posts.data.length < 9) {
                 nextButton.disabled = true;
                 nextButton.classList.add('cursor-not-allowed','text-gray-100');
