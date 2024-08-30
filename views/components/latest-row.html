@@ -82,14 +82,16 @@
             }
 
             
-            if (posts.data.length < 9) {
+            
+            const nextPosts = await fetchPosts(endpoint, page + 1, limit, ajax);
+            if (nextPosts.data.length === 0) {
                 nextButton.disabled = true;
                 nextButton.classList.add('cursor-not-allowed','text-gray-100');
-                nextButton.classList.remove('hover:bg-gray-300','text-gray-700');
+                    nextButton.classList.remove('hover:bg-gray-300','text-gray-700');
             } else {
                 nextButton.disabled = false;
                 nextButton.classList.remove('cursor-not-allowed','text-gray-100');
-                nextButton.classList.add('hover:bg-gray-300','text-gray-700');
+                    nextButton.classList.add('hover:bg-gray-300','text-gray-700');
             }
         }
     
